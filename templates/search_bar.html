@@ -1,0 +1,21 @@
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-md-12">
+            <form action="" method="GET">
+                <div class="input-group">
+                    <input type="text" name="cname" id="cname" value="{{cname}}" class="form-control" placeholder="Category">
+                    <input type="text" name="pname" id="pname" value="{{pname}}" class="form-control" placeholder="Product">
+                    <input type="number" name="price" id="price" value="{{price}}" class="form-control" placeholder="Max Price">
+                    <a href="{{url_for('home_page')}}" class="btn btn-outline-danger">
+                        <i class="fas fa-backspace    "></i>
+                        Clear
+                    </a>
+                    <button class="btn btn-outline-primary" type="submit">
+                        <i class="fa fa-search"></i>
+                        Search
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

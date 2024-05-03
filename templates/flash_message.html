@@ -1,0 +1,18 @@
+<!-- Checks all flashed message on the frontend and gives a green div section for success alert  and red div section for danger alert-->
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    
+    {% for message in messages %}
+    {% if 'success' in message|lower %}  <!--|lower converts the string to lowercase-->
+        <div class="alert alert-success" role="alert">     <!-- we style the flash message with bootstrap alert successs to the layout body to reflect on other inheritance when flash displays alert info -->
+            {{ message }}    <!-- In the div tag we add the flash message we derived from the jinja sectionv"with messages = get_flashed_messages()" above-->
+          </div>
+    {% else %}
+        <div class="alert alert-danger" role="alert">     <!-- we style the flash message with bootstrap alert danger to the layout body to reflect on other inheritance when flash displays alert info -->
+            {{ message }}     <!-- In the div tag we add the flash message we derived from the jinja section"with messages = get_flashed_messages()" above-->
+          </div>
+    {% endif %}
+    {% endfor %}
+    
+{% endif %}
+{% endwith %}

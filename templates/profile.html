@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Profile Page
+{% endblock %}
+
+
+{% block content %}
+    {# 
+        We create a placeholder for the user table name to query the actual user name
+        we retrieve the placeholder in the profile route in route.py to render the user name
+        in replace of this placeholder {{user.username}}.    
+    #}
+    <h1 class="display-1">
+        <span class="text-muted">{{user.username}}</span>
+    </h1>
+
+    <!--creates a link to with bootstrap button style in class that routes to the logout page in route.py file to pop user's session-->
+    <a href="{{url_for('logout_page')}}" class="btn-btn-outline-danger">Log out</a>  
+
+    <!--user option form to change user name and password-->
+    <form action="" method="post" class="form" method="POSTf">
+        <div class="form-group">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" name="username" class="form-control" id="username" value='{{user.username}}'>
+
+        </div>
+
+        <div class="form-group">  <!-- we add a field for the user to comfirm the current password before changing the user password-->
+            <label for="current_password" class="form-label">Current Password</label>  
+            <input type="password" name="current_password" class="form-control" id="current_password" required >
+        </div>
+
+        <div class="form-group">  <!-- we add the  new password form field to the to change user password-->
+            <label for="new_password" class="form-label">New Password</label>  
+            <input type="password" name="new_password" class="form-control" id="new_password" required>
+        </div>
+    
+        <div class="form-group">   <!-- we add the confirm new password form field to change user password -->
+            <label for="confirm_new_password"class="form-label">Confirm New password</label>   
+            <input type="password" name="confirm_new_password" class="form-control" id="confirm_new_password" required >
+        </div>
+
+        <div class="form-group">   <!-- we add the name form field for the user to update -->
+            <label for="name" class="form-label">Full name</label>
+            <input type="text" name="name" class="form-control" id="name" required value='{{user.name}}'>
+        </div>
+
+        <div class="form-group">   <!-- we  finally add the submit button for the user to submit their updates -->
+            <button type="submit" class="btn btn-primary">Update Now</button>  
+    
+    </form>
+{% endblock %}

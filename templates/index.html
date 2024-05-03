@@ -1,0 +1,106 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% include 'search_bar.html' with context %}
+
+
+    <hr>
+    <!-- retrieve the length of all category in the database -->
+    <div class="categories-list">
+
+        <!-- loop through all categories in database -->
+        {% for category in categories %}
+            
+            <h2>{{ category.cat_name }}</h2>
+
+
+            <div class="product">
+                
+                <!-- loop through all products in the database -->
+                {% for product in category.product %} 
+                {% if pname != '' and pname.lower() in product.product_name.lower() or not pname %}
+                    {% if price and product.price <= price or not price %}                    
+                        <!-- search functionality in the front end recieving jinja input from the router -->
+                        <!-- A bootstrap card components for displaying the each products in the database -->
+                        <div class="card" style="width: 18rem;">
+                            <img src="{{ product.product_image_path }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                            <h5 class="card-title">{{ product.product_name }}</h5>
+                            <p class="card-text">
+
+                                <!-- Price text -->
+                                <div class="price">
+                                    <!-- add the ghana cedis sign with the html currency code (&#8373;) -->
+                                    <strong>Price:</strong>
+                                    &#8373; {{ product.price }}
+                                </div>
+
+                                <div class="quantity">
+                                    <strong>Quantity available:</strong>
+                                    {{ product.quantity_available }}
+                                </div>
+
+                                <div class="manu-date">
+                                    <strong>Date manufactured:</strong>
+                                    {{ product.manu_date }}
+
+                                </div>
+                            </p>
+                            
+                            <!-- Ask user for quantity they want to add to cart -->
+                            <div class="quantity-input">
+
+                                <!--
+                                    A different route was created to perform the add to cart funtion on the homepage,
+                                    so we add the route into the action attribute since the homepage route and the
+                                    post method routes are not the same, and set the route's product_id to
+                                    product.id from the from the for loop of the specific product being clicked on
+                                -->
+
+                                <form action="{{url_for('home_page_add_to_cart_post', product_id=product.id)}}" class="form" method="post">
+                                    <label for="quantity_input" class="form-label">Quantity</label>
+                                    <input type="number" name="quantity_input" class="form-control" id="quantity_input" min="1" max="{{ product.quantity_available }}" value="1">
+                                    <button type="submit" class="btn btn-success">Add to cart</button>
+                                </form>
+
+                            </div>
+
+                            </div>
+                        </div>                
+                    {% endif %}
+                {% endif %}
+                {% endfor %}
+            </div>
+
+
+        {% endfor %}
+
+    </div>
+
+
+{% endblock %}
+
+
+{% block style %}
+
+    <style>
+    
+    .categories-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .card {
+        margin: 10px;
+    }
+
+    </style>
+    
+{% endblock %}

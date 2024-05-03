@@ -1,0 +1,85 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Admin Dashboard
+{% endblock %}
+
+{% block content %}
+    <!--DispLay the admin dashboard writing -->
+    <h1>Admin Dashboard</h1>
+
+    <!-- displays the text category in a given font -->
+    <h2 class="display-2">Category
+
+
+    <!-- Adds the link of for redirection from the Add button when clicked on -->
+    <a href="{{url_for('add_category')}}" class="btn btn-success">
+        <!--Add the plus sign to the Add button-->
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        Add category
+    </a>
+
+    </h2>
+
+
+
+
+    <!--We add a table -->
+    <table class="table">
+        <!--We add the table header section with the thead tag-->
+        <thead>
+            <!--We add the table row section with the html tag tr for the header section-->
+            <tr>
+                <!--We add the html table head namesffor the first row being the header-->
+                <th>Category ID</th>
+                <th>Category Name</th>
+                <th>No of Products</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+
+
+        <!-- body section of the table -->
+        <tbody>
+            {% for each_category in categories %}
+                <!--The HTML <td> tag is used to define a cell within a table. It stands for "table data". When used within a <tbody> (table body) element, it defines a cell in a row of data within the table.-->
+                <tr>
+                    <td>{{each_category.id}}</td>
+                    <td>{{each_category.cat_name}}</td>
+                    <td>{{each_category.product|length}}</td>  <!--we use '|length' to list the number of items in the Product table in the database which has a relationship to the category database. We make reference to the product table through the relation of product in category table-->
+                    <td>
+                        
+                        <!-- 
+                            the id is the integer retrieved from the for loop above, to loop through the
+                             categories in the database and retrieve the category ID and adds it to the route 
+                             of category/id url to redirect to the specific category on the route page for further operations
+                        -->
+                        
+                        <a href="{{url_for('show_category', id=each_category.id)}}" class="btn btn-primary">  
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            Sh<!-- - Note for the controller of the crud operation of category in admin section is done in the html page and routes page renders the section for the cat -->ow
+                        </a>
+        
+                        <a href="{{url_for('edit_category', id=each_category.id)}}" class="btn btn-primary">
+                            <i class="fa fa-edit" aria-hidden="true"></i>
+                            Edit
+                        </a>
+
+                        <a href="{{url_for('delete_category', id=each_category.id)}}" class="btn btn-danger">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            Delete
+                        </a>
+
+                    </td>
+
+                </tr>
+            {% endfor %}
+
+        </tbody>
+
+
+    </table>
+
+
+{% endblock %}

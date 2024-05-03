@@ -1,0 +1,79 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Product lists
+{% endblock %}
+
+{% block content %}
+    <!--DispLay the admin dashboard writing -->
+    <h1>Products of category,  {{category.cat_name}}.</h1>
+
+
+    <!-- Adds the link of for redirection from the Add button when clicked on -->
+    <a href="{{url_for('add_product', id=category.id)}}" class="btn btn-success">
+        <!--Add the plus sign to the Add button-->
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        Add
+    </a>
+
+
+
+
+    <!--We add a table -->
+    <table class="table">
+        <!--We add the table header section with the thead tag-->
+        <thead>
+            <!--We add the table row section with the html tag tr for the header section-->
+            <tr>
+                <!--We add the html table head namesffor the first row being the header-->
+                <th>Product id</th>
+                <th>Product name</th>
+                <th>Price</th>
+                <th>Quantity available</th>
+                <th>Date Manufactured</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+
+
+        <!-- body section of the table -->
+        <tbody>
+            {% for each_product in category.product %}
+                <!--The HTML <td> tag is used to define a cell within a table. It stands for "table data". When used within a <tbody> (table body) element, it defines a cell in a row of data within the table.-->
+                <tr>
+                    <td>{{each_product.id}}</td>
+                    <td>{{each_product.product_name}}</td>
+                    <td>{{each_product.price}}</td>
+                    <td>{{each_product.quantity_available}}</td>
+                    <td>{{each_product.manu_date}}</td>
+                    <td>
+                        
+                        <!-- 
+                            the id is the integer retrieved from the for loop above, to loop through the
+                             products in the database and retrieve the product's ID and adds it to the route 
+                             of product/id url to redirect to the specific category on the route page for further operations
+                        -->
+        
+                        <a href="{{url_for('edit_product', id=each_product.id)}}" class="btn btn-primary">
+                            <i class="fa fa-edit" aria-hidden="true"></i>
+                            Edit
+                        </a>
+
+                        <a href="{{url_for('delete_product', id=each_product.id)}}" class="btn btn-danger">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            Delete
+                        </a>
+
+                    </td>
+
+                </tr>
+            {% endfor %}
+
+        </tbody>
+
+
+    </table>
+
+
+{% endblock %}

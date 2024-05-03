@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}   <!-- we inherit layout insert and add login title and body  -->
+
+{% block title %}  {# we add the title section to the layout #}
+    Login Page
+{% endblock %}
+
+
+{% block content %}
+<h1 class="display-1">Login</h1> <!-- we add the name of the page to the layout body -->
+
+
+<form action="" class="form-group" method="post">  <!-- we add the form fields to the layout body -->
+    
+    <div class="form-group">   <!-- we add the User name form fields to the layout body -->
+        <label for="username" class="form-label">Username</label>   
+        <input type="text" name="username" class="form-control" required>
+    </div>
+    <div class="form-group">   <!-- we add the password form field to the layout body -->
+        <label for="password" class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" required>
+    </div>
+    <div class="form-group">   <!-- we  finally add the submit button to the layout body -->
+        <button type="submit" class="btn btn-primary">Login</button>
+
+
+</form>
+    
+{% endblock %}

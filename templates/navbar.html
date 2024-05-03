@@ -1,0 +1,55 @@
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Grocery</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+
+
+          <!-- If the user is logged in we rather show the navbar for the user profile, home page, and cart and not the login and register navbar-->
+          {% if 'user_id' in session %}
+
+
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/">Home</a> 
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/profile">Profile</a> 
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/cart">Cart</a> 
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/transaction_history">Order history</a> 
+                </li>
+
+
+
+          <!-- else,show the navbar for the login and register page. we add the flask route /login in href to make the link work when we click on it-->
+          {% else %}
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/login">Login</a>  
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/register">Register</a> <!-- we add the flask route /register in href to make the link work when we click on it-->
+                </li>
+          {% endif %}
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+{#  
+    This is the nav structure found at the top view of the body in login and register page-->
+    It's included in the body content of the layout html pages
+    with the jinja tag called include- to reflect on other pages
+    that rely on the layout page.
+#}
